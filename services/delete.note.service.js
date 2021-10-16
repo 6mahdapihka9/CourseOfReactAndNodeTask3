@@ -5,12 +5,13 @@ const deleteNoteService = (req, res) => {
     if (!req.body)
         return res.sendStatus(400).send("Error. Note's data not found!");
 
-    let notes = getNotesData();
+    let notes = getNotesData(),
+        index = notes.findIndex(n => n.id === req.params["id"]);
 
-    if (!notes.some(note => note.id === req.params["id"]))
+    if (index === -1)
         return res.sendStatus(400).send("Error. There is no such note!");
 
-    notes.splice(notes.findIndex(n => n.id === req.params["id"]), 1);
+    notes.splice(index, 1);
 
     updateNotesData(notes);
 

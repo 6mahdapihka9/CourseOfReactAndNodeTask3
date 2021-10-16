@@ -8,20 +8,19 @@ const editNoteService = (req, res) => {
         return res.sendStatus(400).send("Error. Note's data not found!");
 
     //archive or unarchive note operation
-    let archOper = typeof req.body.archived === 'boolean';
+    let archOper = typeof req.body.archive === 'boolean';
 
     if (!noteValidation(req.body.name, req.body.content, req.body.category) && !archOper)
         return res.sendStatus(422).send('Error. Inputed data invalid!');
 
     let notes = getNotesData(),
-        id = req.params["id"],
-        index = notes.findIndex(n => n.id === id);
+        index = notes.findIndex(n => n.id === req.params["id"]);
 
     if (index === -1)
         return res.sendStatus(400).send("Error. There is no such note!");
 
     if (archOper)
-        notes[index].archived = req.body.archived;
+        notes[index].archived = req.body.archive;
     else {
         notes[index].name = req.body.name;
         notes[index].category = req.body.category;
@@ -30,7 +29,7 @@ const editNoteService = (req, res) => {
     }
 
     updateNotesData(notes);
-    res.send('Note ' + ((archOper)? (req.body.archived)? 'archived' : 'unarchived' : 'updated') + ' successfully!');
+    res.send('Note ' + ((archOper)? (req.body.archive)? 'archived' : 'unarchived' : 'updated') + ' successfully!');
 };
 
 module.exports = { editNoteService };
