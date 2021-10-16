@@ -6,18 +6,15 @@ const { readNoteService } = require("../services/read.note.service.js");
 const { editNoteService } = require("../services/edit.note.service.js");
 const { deleteNoteService } = require("../services/delete.note.service.js");
 
-const router = express.Router();
-// router.use(express.static(path.join(__dirname, "../public")));
+const aggregateNoteData = require("../services/aggregate.notes.data.service");
+const readAllNotesService = require("../services/read.all.notes.service.js");
 
-//Get aggregated data statistics. You don’t have to mock this data. You need to calculate it based on notes objects you have.
+const router = express.Router();
+
 //get object with analyzed stats table data
-// router.get('/stats',()=>{
-//
-// });
-// //Get all notes.
-// router.get('/',()=>{
-//
-// });
+router.get('/stats', aggregateNoteData);
+//Read all notes
+router.get('/', readAllNotesService);
 
 
 //Create

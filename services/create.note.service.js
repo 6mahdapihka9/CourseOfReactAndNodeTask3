@@ -1,5 +1,5 @@
-const makeID = require('../heplers/id.generator.js');
-const getDatesFromText = require('../heplers/date.finder.js');
+const makeID = require('../helpers/id.generator.js');
+const getDatesFromText = require('../helpers/date.finder.js');
 const noteValidation = require('./note.validation.service.js');
 const getNotesData = require('../repositories/get.notes.data.js');
 const updateNotesData = require("../repositories/update.notes.data");

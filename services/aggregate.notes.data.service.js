@@ -1,35 +1,15 @@
-const aggregateNoteData = notes => {
-    let Ideas, Quotes, Tasks, Thoughts, IdeasActive, QuotesActive, TasksActive, ThoughtsActive;
-    Ideas = Quotes = Tasks = Thoughts = IdeasActive = QuotesActive = TasksActive = ThoughtsActive = 0;
-    let statistics = [];
+const updateStatistics = require("../helpers/update.statistics.data");
+const getNotesData = require("../repositories/get.notes.data");
+
+const aggregateNoteData = (req, res) => {
+    let notes = getNotesData(),
+        statistics = [];
 
     notes.forEach(note => {
-        if (note.category === 'Idea'){
-
-            statistics.push({
-
-            })
-            Ideas++;
-            if (!note.archived)
-                IdeasActive++;
-        }
-        if (note.category === 'Quote') {
-            Quotes++;
-            if (!note.archived)
-                QuotesActive++;
-        }
-        if (note.category === 'Task') {
-            Tasks++;
-            if (!note.archived)
-                TasksActive++;
-        }
-        if (note.category === 'Random Thought') {
-            Thoughts++;
-            if (!note.archived)
-                ThoughtsActive++;
-        }
+        updateStatistics(statistics, note.category, note.archived);
     });
-    return statistics;
+
+    return res.send(statistics);
 }
 
 module.exports = aggregateNoteData
