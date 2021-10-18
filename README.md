@@ -21,10 +21,10 @@ GET | /notes/stats | Get aggregated data statistics. You don’t have to mock th
 
 You can use an Express [generator](https://expressjs.com/en/starter/generator.html) that will create a very basic structure for you. We suggest you follow the N-tier architecture pattern. That means you have to add a few more folders to that structure:
 
-**Routes** - description of your routes and service calls
-**Services** - Essense of business logic. You can call other services here, do validations, call repositories etc.
-**Repositories** - here you work with data itself - add new items, remove, update. However you don’t have to have any business logic here. 
-**Helpers** - additional functions that can be used across the codebase. 
+- **Routes** - description of your routes and service calls
+- **Services** - Essense of business logic. You can call other services here, do validations, call repositories etc.
+- **Repositories** - here you work with data itself - add new items, remove, update. However you don’t have to have any business logic here. 
+- **Helpers** - additional functions that can be used across the codebase. 
 
 Since we don’t use a database for the task, we suggest you store data simply in array variables in memory. This is not something you would do within a real project but works just fine for this hometask. However, you can use any library that will allow you to work with a persistence layer of your choice. 
 
