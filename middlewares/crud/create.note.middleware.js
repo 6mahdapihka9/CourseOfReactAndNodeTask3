@@ -5,8 +5,10 @@ const createNote = require("../../repositories/create.note");
 const createNoteMiddleware = (req, res) => {
     let error = bodyCheckerService(req.body) ||
                 incomingDataValidationService(req.body.name, req.body.content, req.body.category);
-    if (error)
-        return res.sendStatus(error.status).send(error.message);
+    if (error){
+        res.statusCode = error.status;
+        res.send(error.message);
+    }
 
     createNote(req.body);
 

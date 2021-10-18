@@ -11,8 +11,10 @@ const updateNoteMiddleware = (req, res) => {
         noteIdCheckerService(readNotesData(), req.params["id"]) ||
         (incomingDataValidationService(req.body.name, req.body.content, req.body.category) &&
         archiveOperationCheckerService(req.body.archive));
-    if (error)
-        return res.sendStatus(error.status).send(error.message);
+    if (error){
+        res.statusCode = error.status;
+        res.send(error.message);
+    }
 
     if (req.body.archive !== undefined)
         res.send(archiveUnarchiveNote(req.body.archive, req.params["id"]));

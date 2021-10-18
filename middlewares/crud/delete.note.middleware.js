@@ -4,8 +4,10 @@ const deleteNote = require("../../repositories/delete.note");
 
 const deleteNoteMiddleware = (req, res) => {
     let error = noteIdCheckerService(readNotesData(), req.params["id"]);
-    if (error)
-        return res.sendStatus(error.status).send(error.message);
+    if (error){
+        res.statusCode = error.status;
+        res.send(error.message);
+    }
 
     deleteNote(req.params["id"]);
 
